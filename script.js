@@ -9,6 +9,8 @@ const SECONDS = 0;
 
 MONTH = MONTH - 1;
 
+// Воду отключат до 24.07
+
 (function () {
   const second = 1000,
     minute = second * 60,
@@ -57,7 +59,7 @@ MONTH = MONTH - 1;
       //do something later when date is reached
       if (distance < 0) {
         document.getElementById('headline').innerText =
-          '«Free Weekend has come to an end.»';
+          "«The hot water's been cut off»";
         document.getElementById('countdown').style.display = 'none';
         document.getElementById('content').style.display = 'block';
         clearInterval(x);
