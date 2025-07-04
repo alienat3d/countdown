@@ -1,45 +1,67 @@
 'use strict';
 
+const YEAR = 2025;
+let MONTH = 7;
+const DAY = 14;
+const HOURS = 9;
+const MINUTES = 0;
+const SECONDS = 0;
+
+MONTH = MONTH - 1;
+
 (function () {
-	const second = 1000,
-		minute = second * 60,
-		hour = minute * 60,
-		day = hour * 24;
+  const second = 1000,
+    minute = second * 60,
+    hour = minute * 60,
+    day = hour * 24;
 
-	//I'm adding this section so I don't have to keep updating this pen every year :-)
-	//remove this if you don't need it
-	// let today = new Date(),
-	//     dd = String(today.getDate()).padStart(2, "0"),
-	//     mm = String(today.getMonth() + 1).padStart(2, "0"),
-	//     yyyy = today.getFullYear(),
-	//     nextYear = yyyy + 1,
-	//     dayMonth = "09/30/",
-	//     birthday = dayMonth + yyyy;
+  //I'm adding this section so I don't have to keep updating this pen every year :-)
+  //remove this if you don't need it
+  // let today = new Date(),
+  //     dd = String(today.getDate()).padStart(2, "0"),
+  //     mm = String(today.getMonth() + 1).padStart(2, "0"),
+  //     yyyy = today.getFullYear(),
+  //     nextYear = yyyy + 1,
+  //     dayMonth = "09/30/",
+  //     birthday = dayMonth + yyyy;
 
-	// today = mm + "/" + dd + "/" + yyyy;
-	// if (today > birthday) {
-	//   birthday = dayMonth + nextYear;
-	// }
-	//end
+  // today = mm + "/" + dd + "/" + yyyy;
+  // if (today > birthday) {
+  //   birthday = dayMonth + nextYear;
+  // }
+  //end
 
-	const countDown = new Date(2024, 10, 4, 12, 20, 0).getTime(),
-		x = setInterval(function () {
+  const countDown = new Date(
+      YEAR,
+      MONTH,
+      DAY,
+      HOURS,
+      MINUTES,
+      SECONDS
+    ).getTime(),
+    x = setInterval(function () {
+      const now = new Date().getTime(),
+        distance = countDown - now;
 
-			const now = new Date().getTime(),
-				distance = countDown - now;
+      (document.getElementById('days').innerText = Math.floor(distance / day)),
+        (document.getElementById('hours').innerText = Math.floor(
+          (distance % day) / hour
+        )),
+        (document.getElementById('minutes').innerText = Math.floor(
+          (distance % hour) / minute
+        )),
+        (document.getElementById('seconds').innerText = Math.floor(
+          (distance % minute) / second
+        ));
 
-			document.getElementById("days").innerText = Math.floor(distance / (day)),
-				document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
-				document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
-				document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
-
-			//do something later when date is reached
-			if (distance < 0) {
-				document.getElementById("headline").innerText = "«Free Weekend has come to an end.»";
-				document.getElementById("countdown").style.display = "none";
-				document.getElementById("content").style.display = "block";
-				clearInterval(x);
-			}
-			//seconds
-		}, 0)
-}());
+      //do something later when date is reached
+      if (distance < 0) {
+        document.getElementById('headline').innerText =
+          '«Free Weekend has come to an end.»';
+        document.getElementById('countdown').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+        clearInterval(x);
+      }
+      //seconds
+    }, 0);
+})();
